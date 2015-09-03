@@ -82,4 +82,6 @@ production:
   <<: *default
   database: colossus-shop_production
   username: colossus-shop
-  password: <%= ENV['COLOSSUS-SHOP_DATABASE_PASSWORD'] %>
+  encoding: utf8
+  min_messages: warning
+  timeout: 5000

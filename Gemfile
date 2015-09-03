@@ -40,8 +40,6 @@ gem 'font-awesome-rails'    # only if you need more icons
 gem 'simple_form'   # always install when working with forms
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -49,10 +47,17 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+  #debugging
   gem "better_errors"
   gem "binding_of_caller"
   gem 'did_you_mean'
+  gem 'byebug'
+
+  #testing
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
+
 
 group :production do
   gem 'rails_12factor'

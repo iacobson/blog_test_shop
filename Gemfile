@@ -32,6 +32,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'devise'
+
 gem 'slim'  # add slim support
 gem 'slim-rails'    # replace the .erb with .slim
 gem 'bootstrap-sass'    # add bootstrap to rails

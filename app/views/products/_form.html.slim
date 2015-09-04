@@ -1,0 +1,7 @@
+= simple_form_for @product do |f|
+  = f.error_notification
+  = f.input :name, required: true, label: false, placeholder: "product name", input_html: {class: "form-control"}
+  = f.input :price, required: true, label: false, placeholder: "unit price", input_html: {class: "form-control"}
+  = f.input :stock, required: true, label: false, placeholder: "available units in stock", input_html: {class: "form-control"}
+  = f.input :category, required: true, label: false, placeholder: "product category", input_html: {class: "form-control"}
+  = f.button :submit, class: "btn btn-primary btn-block"

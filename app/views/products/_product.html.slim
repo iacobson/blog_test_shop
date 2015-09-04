@@ -1,0 +1,24 @@
+
+
+
+  .col-md-6
+    .panel.panel-default
+      .panel-heading.small
+        = product.stock
+        |  available in stock  
+      .panel-body
+        h3 
+          = product.name
+          
+        p
+          | price:  
+          = product.price
+      .panel-footer.clearfix
+        - if current_user.admin
+          .col-md-6
+            = link_to "EDIT", edit_product_path(product), class: "btn btn-warning btn-block"
+          .col-md-6
+            = link_to "DELETE", product_path(product), class: "btn btn-danger btn-block", 
+                                                  data: { confirm: "Are you sure?" }, 
+                                                  method: :delete
+      

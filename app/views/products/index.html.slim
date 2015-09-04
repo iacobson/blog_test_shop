@@ -1,0 +1,17 @@
+.row
+  .col-md-2
+    h3.text-center CATEGORIES
+    .row
+      |aa
+  
+  .col-md-5
+    h3.text-center PRODUCTS
+    
+    - if current_user.admin
+      = link_to "ADD NEW PRODUCT", new_product_path, class: "btn btn-primary"
+    p   
+    .row
+      = render @products      
+      
+  .col-md-5
+    h3.text-center SHOPPING CART

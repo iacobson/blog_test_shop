@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  root 'pages#home'
+  root 'products#index'
+
+  resources :products
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 

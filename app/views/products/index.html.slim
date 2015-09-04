@@ -3,9 +3,10 @@
     h3.text-center CATEGORIES
     
     div class="btn-group-vertical" role="group"
-      / Send product category as param to index
+      // Send product category as param to index
+      // Activate the button for the current category
       - @categories.each do |cat|
-        = link_to cat, products_path(category: cat), class: "btn btn-default", type: "button"
+        = link_to cat, products_path(category: cat), class: "btn btn-default #{'active' if @products.first.category == cat}", type: "button"
 
 
   .col-md-5
@@ -19,3 +20,19 @@
       
   .col-md-5
     h3.text-center SHOPPING CART
+    .col-md-6 
+      strong PRODUCT
+    .col-md-3.text-right 
+      strong PRICE
+    - @order.products.each do |prod|
+      .col-md-6 = prod.name
+      .col-md-3.text-right = prod.price
+      .col-md-3
+        = link_to "REMOVE", remove_from_order_path(@order, product: prod), 
+                                                class: "btn btn-xs btn-danger btn-block",
+                                                method: :put
+      .col-md-12   
+    .col-md-6 
+      strong TOTAL
+    .col-md-3.text-right 
+      strong = @order.calculate_total

@@ -9,6 +9,12 @@ class ProductsController < ApplicationController
     else
       @products = Product.where(category: @categories[0])
     end
+
+    # find or create the current active order for the user
+    @order ||= current_user.orders.find_by(status: "active")
+    if @order == nil
+      @order = current_user.orders.create(status: "active")
+    end
   end
 
   def new
@@ -20,7 +26,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html{redirect_to products_path, notice: "Product created."}
+        format.html{redirect_to products_path(category: @product.category), notice: "Product created"}
       else
         format.html{render "new", notice: "Something went wrong, please try again"}
       end
@@ -33,7 +39,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html{redirect_to products_path, notice: "Product updated."}
+        format.html{redirect_to products_path(category: @product.category), notice: "Product updated"}
       else
         format.html{render "edit", notice: "Something went wrong, please try again"}
       end
@@ -43,15 +49,14 @@ class ProductsController < ApplicationController
   def destroy
     respond_to do |format|
       if @product.destroy
-        format.html{redirect_to products_path, notice: "Product deleted."}
+        format.html{redirect_to products_path(category: @product.category), notice: "Product deleted"}
       else
-        format.html{redirect_to products_path, notice: "Something went wrong, please try again"}
+        format.html{redirect_to products_path(category: @product.category), notice: "Something went wrong, please try again"}
       end
     end
   end
 
   private
-
     def product_params
       params.require(:product).permit(:name, :price, :stock, :category)
     end
@@ -59,5 +64,4 @@ class ProductsController < ApplicationController
     def set_product
       @product = Product.find(params[:id])
     end
-
 end

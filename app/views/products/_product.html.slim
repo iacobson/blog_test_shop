@@ -21,4 +21,7 @@
             = link_to "DELETE", product_path(product), class: "btn btn-danger btn-block", 
                                                   data: { confirm: "Are you sure?" }, 
                                                   method: :delete
-      
+        - else
+          = link_to "ADD TO CART", add_to_order_path(@order, product: product), 
+                                                  class: "btn btn-primary btn-block",
+                                                  method: :put

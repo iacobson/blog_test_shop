@@ -2,7 +2,13 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :destroy]
 
   def index
-    @products = Product.all
+    # display products depending on the category. Category is sent by frontend as param
+    @categories = Product.pluck(:category).uniq.sort
+    if params[:category]
+      @products = Product.where(category: params[:category])
+    else
+      @products = Product.where(category: @categories[0])
+    end
   end
 
   def new

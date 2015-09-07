@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root 'products#index'
 
   resources :products, except: :show
-  resources :orders, only: :destroy do
+
+  resources :orders, only: [:update, :destroy] do
     member do
       #custom PUT actions (outside CRUD) for adding and remove products from the order
       put :add_to

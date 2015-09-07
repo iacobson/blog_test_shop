@@ -23,5 +23,5 @@
                                                   method: :delete
         - else
           = link_to "ADD TO CART", add_to_order_path(@order, product: product), 
-                                                  class: "btn btn-primary btn-block",
-                                                  method: :put
+                            class: "btn btn-primary btn-block btn-xs #{'disabled' if product.stock == 0}",             
+                            method: :put

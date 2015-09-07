@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe Product do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should convert category to uppercase" do
+    product = FactoryGirl.create(:product, category: "electronics")
+
+    expect(product.category).to eql("ELECTRONICS")
+  end
+
 end

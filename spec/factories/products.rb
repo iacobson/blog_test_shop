@@ -1,9 +1,8 @@
 FactoryGirl.define do
   factory :product do
-    name "MyString"
-price 1
-stock 1
-category "MyString"
+    sequence(:name) {|n| "prod#{n}"}
+    price 5
+    stock 10
+    category "electronics"
   end
-
 end

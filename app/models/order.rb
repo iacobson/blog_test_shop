@@ -41,6 +41,8 @@ class Order < ActiveRecord::Base
 
   # update stock at checkout time
   def update_stocks(prod, qty)
+
     prod.update_attributes(stock: (prod.stock-qty))
+
   end
 end

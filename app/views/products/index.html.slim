@@ -20,34 +20,35 @@
     .row
       = render @products      
       
-  .col-md-5
-    h3.text-center SHOPPING CART
-    .col-md-6 
-      strong PRODUCT
-    .col-md-3.text-right 
-      strong PRICE
-    - @order.products.each do |prod|
-      .col-md-6 = prod.name
-      .col-md-3.text-right = prod.price
+  - if !current_user.admin    
+    .col-md-5
+      h3.text-center SHOPPING CART
+      .col-md-6 
+        strong PRODUCT
+      .col-md-3.text-right 
+        strong PRICE
+      - @order.products.each do |prod|
+        .col-md-6 = prod.name
+        .col-md-3.text-right = prod.price
+        .col-md-3
+          = link_to "REMOVE", remove_from_order_path(@order, product: prod), 
+                                                  class: "btn btn-xs btn-danger btn-block",
+                                                  method: :put
+        .col-md-12
+    
+      .col-md-6 
+        strong TOTAL
+      .col-md-3.text-right 
+        strong = @order.calculate_total
       .col-md-3
-        = link_to "REMOVE", remove_from_order_path(@order, product: prod), 
-                                                class: "btn btn-xs btn-danger btn-block",
-                                                method: :put
       .col-md-12
-  
-    .col-md-6 
-      strong TOTAL
-    .col-md-3.text-right 
-      strong = @order.calculate_total
-    .col-md-3
-    .col-md-12
-      p  
-    .col-md-8
-      = link_to "CHECKOUT", order_path(@order), 
-        class: "btn btn-primary btn-block #{'disabled' if @order.products.size == 0}",
-        method: :put
-    .col-md-4
-      = link_to "DELETE CART", order_path(@order), 
-        class: "btn btn-danger btn-block #{'disabled' if @order.products.size == 0}", 
-        data: { confirm: "Are you sure?" }, 
-        method: :delete
+        p  
+      .col-md-8
+        = link_to "CHECKOUT", order_path(@order), 
+          class: "btn btn-primary btn-block #{'disabled' if @order.products.size == 0}",
+          method: :put
+      .col-md-4
+        = link_to "DELETE CART", order_path(@order), 
+          class: "btn btn-danger btn-block #{'disabled' if @order.products.size == 0}", 
+          data: { confirm: "Are you sure?" }, 
+          method: :delete

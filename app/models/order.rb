@@ -22,6 +22,8 @@ class Order < ActiveRecord::Base
 
   # check stock for each item and adjust quantities in the cart if necessary
   def check_stocks
+    # if the order is updated according to the stock, alert user and ask to chekcout again
+    order_changed = "no_order_change"
     items_counter.each do |prod, qty|
       # if the quantity inside the cart is greaterthan the one in the stock, adjust the quantity in the cart
       product = Product.find(prod)
@@ -31,18 +33,17 @@ class Order < ActiveRecord::Base
         diff.abs.times do
           ProductOrder.find_by(order: self, product: prod).destroy
         end
-        # remove all products from stock
-        update_stocks(product, product.stock)
+        order_changed = "order_changed"
       else
         update_stocks(product, qty)
       end
     end
+    return order_changed
   end
 
   # update stock at checkout time
   def update_stocks(prod, qty)
-
     prod.update_attributes(stock: (prod.stock-qty))
-
   end
+
 end

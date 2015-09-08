@@ -1,10 +1,13 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :destroy]
+  # cancancan authorization
+  load_and_authorize_resource through: :current_user
 
   def index
     # display products depending on the category. Category is sent by frontend as param
     @categories = Product.pluck(:category).uniq.sort
-    if params[:category]
+
+    if params[:category] && @categories.include?(params[:category])
       @products = Product.where(category: params[:category])
     else
       @products = Product.where(category: @categories[0])

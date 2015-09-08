@@ -5,6 +5,7 @@ describe Order do
     @user1 = FactoryGirl.create(:user)
     @user2 = FactoryGirl.create(:user)
     @user3 = FactoryGirl.create(:user)
+    @admin = FactoryGirl.create(:user, admin: true)
 
     @product1 = FactoryGirl.create(:product, price: 5, stock: 10)
     @product2 = FactoryGirl.create(:product, price: 3, stock: 10)
@@ -12,7 +13,7 @@ describe Order do
     @order1 = FactoryGirl.create(:order, user: @user1, status: "active")
   end
 
-  context "validations" do
+  describe "validations" do
 
     it "should not allow one user to have more than one active order" do
       expect{FactoryGirl.create(:order, user: @user1, status: "active")}.to raise_error
@@ -28,7 +29,7 @@ describe Order do
     end
   end
 
-  context "total" do
+  describe "total" do
 
     it "should calculate the order total" do
       @order1.products = [@product1, @product1, @product2]
@@ -38,7 +39,7 @@ describe Order do
     end
   end
 
-  context "update stocks and update order" do
+  describe "update stocks and update order" do
 
     it "should update stocks" do
       @order1.products = [@product1, @product1, @product2]

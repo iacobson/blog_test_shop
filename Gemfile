@@ -33,8 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'devise'
-
+gem 'devise' # authentification
 gem 'slim'  # add slim support
 gem 'slim-rails'    # replace the .erb with .slim
 gem 'bootstrap-sass'    # add bootstrap to rails
@@ -42,6 +41,7 @@ gem 'autoprefixer-rails'    # adds browsers prefixes to css
 gem 'font-awesome-rails'    # more icons
 gem 'simple_form'   # working with forms
 gem 'gravatarify'   # add gravatar picture
+gem 'cancancan' #handling authorizations
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views

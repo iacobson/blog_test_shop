@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :order do
-    status "MyString"
+    status "active"
   end
 
 end

@@ -10,5 +10,12 @@ html
       | <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
 
   body
-    .container
-      = yield
+  
+  = render "layouts/topmenu"
+  
+  - flash.each do |type, message|
+    .alert.alert-info.fade-in
+      button.close data-dismiss="alert" x
+      = message
+  .container-fluid
+    = yield

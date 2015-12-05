@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
+ruby '2.2.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -33,17 +33,17 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'devise'
-
+gem 'devise' # authentification
 gem 'slim'  # add slim support
 gem 'slim-rails'    # replace the .erb with .slim
 gem 'bootstrap-sass'    # add bootstrap to rails
 gem 'autoprefixer-rails'    # adds browsers prefixes to css
-gem 'font-awesome-rails'    # only if you need more icons
-gem 'simple_form'   # always install when working with forms
+gem 'font-awesome-rails'    # more icons
+gem 'simple_form'   # working with forms
+gem 'gravatarify'   # add gravatar picture
+gem 'cancancan' #handling authorizations
 
 group :development, :test do
-
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
@@ -60,7 +60,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
-
 
 group :production do
   gem 'rails_12factor'

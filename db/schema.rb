@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904075033) do
+ActiveRecord::Schema.define(version: 20151206123623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "computers", force: :cascade do |t|
+    t.string "name"
+    t.string "cpu"
+    t.string "memory"
+  end
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
@@ -24,6 +30,12 @@ ActiveRecord::Schema.define(version: 20150904075033) do
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
+  create_table "printers", force: :cascade do |t|
+    t.string  "name"
+    t.string  "type"
+    t.integer "ppm"
+  end
 
   create_table "product_orders", force: :cascade do |t|
     t.integer  "product_id"
@@ -37,14 +49,15 @@ ActiveRecord::Schema.define(version: 20150904075033) do
 
   create_table "products", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "name",       null: false
-    t.integer  "price",      null: false
-    t.integer  "stock",      null: false
-    t.string   "category",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "price",         null: false
+    t.integer  "stock",         null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "category_type"
+    t.integer  "category_id"
   end
 
+  add_index "products", ["category_type", "category_id"], name: "index_products_on_category_type_and_category_id", using: :btree
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|

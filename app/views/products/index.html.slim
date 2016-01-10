@@ -6,7 +6,7 @@
       // Send product category as param to index
       // Activate the button for the current category
       - @categories.each do |cat|
-        = link_to cat, products_path(category: cat), 
+        = link_to cat.upcase, products_path(category: cat), 
           class: "btn btn-default #{'active' if @products.first.category == cat}", 
           type: "button"
 

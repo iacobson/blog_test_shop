@@ -5,12 +5,12 @@ class ProductsController < ApplicationController
 
   def index
     # display products depending on the category. Category is sent by frontend as param
-    @categories = Product.pluck(:category).uniq.sort
+    @categories = Product.pluck(:category_type).uniq.sort
 
     if params[:category] && @categories.include?(params[:category])
-      @products = Product.where(category: params[:category])
+      @products = Product.where(category_type: params[:category]).includes(:category) # avoids n+1 issue
     else
-      @products = Product.where(category: @categories[0])
+      @products = Product.where(category_type: @categories[0]).includes(:category)
     end
 
     # find or create the current active order for the user

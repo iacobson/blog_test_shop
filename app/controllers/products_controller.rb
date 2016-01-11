@@ -4,20 +4,10 @@ class ProductsController < ApplicationController
   load_and_authorize_resource through: :current_user
 
   def index
-    # display products depending on the category. Category is sent by frontend as param
-    @categories = Product.pluck(:category_type).uniq.sort
-
-    if params[:category] && @categories.include?(params[:category])
-      @products = Product.where(category_type: params[:category]).includes(:category) # avoids n+1 issue
-    else
-      @products = Product.where(category_type: @categories[0]).includes(:category)
-    end
-
-    # find or create the current active order for the user
-    @order ||= current_user.orders.find_by(status: "active")
-    if @order == nil
-      @order = current_user.orders.create(status: "active")
-    end
+    shopping_cart = ShoppingCart.new(user: current_user, params: params)
+    @categories = shopping_cart.product_categories
+    @products = shopping_cart.products_by_category
+    @order = shopping_cart.current_order
   end
 
   def new
